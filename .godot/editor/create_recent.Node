@@ -1,0 +1,14 @@
+CollisionShape2D
+Area2D
+PathFollow2D
+Path2D
+Marker2D
+Timer
+Sprite2D
+Label
+MarginContainer
+Control
+CanvasLayer
+Node2D
+VisibleOnScreenEnabler2D
+Camera2D
