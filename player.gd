@@ -36,10 +36,7 @@ func _process(delta):
 		if Input.is_action_just_pressed("shoot"):
 			shoot()
 		if  Input.is_action_just_pressed("insert"):
-			_Fila.Insere(fila, gunsColors.purple, MUNICAO)
-			if _Fila.Ultimo == 0:
-				world.update_ui_color(gunsColors.purple)
-				world.update_ui_ammo(MUNICAO)
+			insertAmmo(gunsColors.purple)
 	pass
 
 func animateIdle():
@@ -112,5 +109,9 @@ func shoot():
 		world.update_ui_ammo(returns[0])
 	else:
 		return
-
-
+		
+func insertAmmo(color):
+	_Fila.Insere(fila, color, MUNICAO)
+	if _Fila.Ultimo == 0:
+		world.update_ui_color(color)
+		world.update_ui_ammo(MUNICAO)

@@ -1,4 +1,7 @@
+res://world.tscn
+res://ammo.tscn
+res://mob.tscn
+res://Bullet.tscn
 res://mob_purple.tscn
-res://Bullet.gd
-res://mob.gd
-res://mob_blue.gd
+res://mob_red.tscn
+res://mob_yellow.tscn
