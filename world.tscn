@@ -77,6 +77,8 @@ zoom = Vector2(2.285, 2.285)
 
 [node name="BulletContainer" type="Node2D" parent="."]
 
+[node name="AmmoContainer" type="Node2D" parent="."]
+
 [node name="UI" parent="." instance=ExtResource("4_65uki")]
 unique_name_in_owner = true
 
@@ -86,6 +88,10 @@ autostart = true
 
 [node name="StartTimer" type="Timer" parent="."]
 wait_time = 10.0
+
+[node name="AmmoTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
 
 [node name="StartPosition" type="Marker2D" parent="."]
 position = Vector2(344, 208)
@@ -98,7 +104,15 @@ curve = SubResource("Curve2D_wy2dx")
 position = Vector2(176, 112)
 rotation = -0.0178552
 
+[node name="AmmoLocation" type="Path2D" parent="."]
+curve = SubResource("Curve2D_wy2dx")
+
+[node name="AmmoSpawn" type="PathFollow2D" parent="AmmoLocation"]
+position = Vector2(176, 112)
+rotation = -0.0178552
+
 [node name="Bullet" parent="." instance=ExtResource("9_psmam")]
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]
+[connection signal="timeout" from="AmmoTimer" to="." method="_on_ammo_timer_timeout"]

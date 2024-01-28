@@ -83,8 +83,11 @@ func Insere_Prioridade(fila, hexaCor, municao, prioridade):
 		fila[0] = filaAux
 	else:
 		if prioridade:
-			for n in range(0, LIMITE_ARMAS):
-				fila[n - 1] = fila[n+1]
+			for n in range(LIMITE_ARMAS * -1, 0):
+				var number = n * -1
+				fila[number] = fila[number-1]
+			fila[0] = filaAux
+			Ultimo += 1
 		else:
 			Ultimo += 1
 			fila[Ultimo] = filaAux
