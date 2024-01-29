@@ -229,6 +229,7 @@ size = Vector2(24, 24)
 [node name="mob_red" type="CharacterBody2D"]
 modulate = Color(1, 0, 0, 1)
 position = Vector2(516, 244)
+scale = Vector2(1.5, 1.5)
 script = ExtResource("1_b8ei5")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

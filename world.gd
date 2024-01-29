@@ -33,7 +33,7 @@ func _ready():
 	randomize()
 	_Fila.Insere(filaSpawnGuns, gunsColors.purple, 1)
 	_Fila.Insere(filaSpawnGuns, gunsColors.blue, 1)
-	AleatorizarArmas()
+	
 
 
 func _on_player_bullet_shot(bullet_scene, location, direction, hexColor):
@@ -100,6 +100,9 @@ func _on_ammo_timer_timeout():
 		ammo.position = ammo_location.position
 		AmmoContainer.add_child(ammo)
 		_Fila.Retira(filaSpawnGuns, returns)
+		
+	else:
+		AleatorizarArmas()
 	pass # Replace with function body.
 
 func GenerateWeaponRandom():
@@ -109,15 +112,15 @@ func GenerateWeaponRandom():
 	return random_choice
 
 
-func EstaNaFila(fila, corArma):
+func EstaNaFila(fila, corArma, class_fila = Fila.new()):
 	var returns = [1, null]
 	var filaAux = [null, null, null, null]
 	var estaFila =  false
 	
 	var _FilaAux = Fila.new()
 	
-	while not _Fila.Vazia(fila):
-		_Fila.Retira(fila,returns)
+	while not class_fila.Vazia(fila):
+		class_fila.Retira(fila,returns)
 		_FilaAux.Insere(filaAux, returns[0], returns[1])
 		if corArma == returns[1]:
 			estaFila = true
@@ -125,7 +128,7 @@ func EstaNaFila(fila, corArma):
 	returns  = [1, null]
 	while not _FilaAux.Vazia(filaAux):
 		_FilaAux.Retira(filaAux,returns)
-		_Fila.Insere(fila, returns[0], returns[1])
+		class_fila.Insere(fila, returns[0], returns[1])
 
 	return estaFila
 
@@ -140,11 +143,8 @@ func AleatorizarArmas():
 		while aux != 4:
 			generateWeapon = GenerateWeaponRandom()
 			
-			if not EstaNaFila(filaSpawnGuns, generateWeapon):
+			if not EstaNaFila(filaSpawnGuns, generateWeapon, _Fila):
 				estaFila = not EstaNaFila(player.fila, generateWeapon)
 				_Fila.Insere_Prioridade(filaSpawnGuns, generateWeapon, 1, estaFila)
 				aux = aux + 1
 			
-		print(player.fila)	
-		print("----")
-		print(filaSpawnGuns)
