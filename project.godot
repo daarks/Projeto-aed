@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 AudioManager="*res://AudioManager/audio_manager.tscn"
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [input]
 
 up={

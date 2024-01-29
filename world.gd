@@ -31,8 +31,9 @@ var gunsColors = {
 func _ready():
 	player.bullet_shot.connect(_on_player_bullet_shot)
 	randomize()
-	_Fila.Insere_Prioridade(filaSpawnGuns, gunsColors.red, 5, false)
-	_Fila.Insere_Prioridade(filaSpawnGuns, gunsColors.yellow, 5, true)
+	_Fila.Insere(filaSpawnGuns, gunsColors.purple, 1)
+	_Fila.Insere(filaSpawnGuns, gunsColors.blue, 1)
+	
 
 
 func _on_player_bullet_shot(bullet_scene, location, direction, hexColor):
@@ -94,9 +95,56 @@ func _on_ammo_timer_timeout():
 		ammo_location.progress_ratio = randf()
 
 		var ammo = ammo_Scene.instantiate()
-		var returns = [5, null]
+		var returns = [1, null]
 		ammo.hexColor = _Fila.ImprimirHexaCor(filaSpawnGuns)
 		ammo.position = ammo_location.position
 		AmmoContainer.add_child(ammo)
 		_Fila.Retira(filaSpawnGuns, returns)
+		
+	else:
+		AleatorizarArmas()
 	pass # Replace with function body.
+
+func GenerateWeaponRandom():
+	var size = gunsColors.size()
+	var random_key = gunsColors.keys()[randi() % size]
+	var random_choice = gunsColors[random_key]
+	return random_choice
+
+
+func EstaNaFila(fila, corArma, class_fila = Fila.new()):
+	var returns = [1, null]
+	var filaAux = [null, null, null, null]
+	var estaFila =  false
+	
+	var _FilaAux = Fila.new()
+	
+	while not class_fila.Vazia(fila):
+		class_fila.Retira(fila,returns)
+		_FilaAux.Insere(filaAux, returns[0], returns[1])
+		if corArma == returns[1]:
+			estaFila = true
+	
+	returns  = [1, null]
+	while not _FilaAux.Vazia(filaAux):
+		_FilaAux.Retira(filaAux,returns)
+		class_fila.Insere(fila, returns[0], returns[1])
+
+	return estaFila
+
+
+func AleatorizarArmas():
+	if _Fila.Vazia(filaSpawnGuns):
+		print(player.fila)	
+		var generateWeapon;
+		var estaFila = false;
+		var aux = 0;
+		
+		while aux != 4:
+			generateWeapon = GenerateWeaponRandom()
+			
+			if not EstaNaFila(filaSpawnGuns, generateWeapon, _Fila):
+				estaFila = not EstaNaFila(player.fila, generateWeapon)
+				_Fila.Insere_Prioridade(filaSpawnGuns, generateWeapon, 1, estaFila)
+				aux = aux + 1
+			

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://vvutvhwu2m5y"]
+
+[ext_resource type="Texture2D" uid="uid://d4gseufpevef8" path="res://Sprites/Bullets/white.png" id="1_w7k2i"]
+
+[node name="ammo_ui" type="Sprite2D"]
+modulate = Color(1, 0, 0, 1)
+texture_filter = 1
+position = Vector2(196, 52)
+scale = Vector2(0.106741, 0.245)
+texture = ExtResource("1_w7k2i")

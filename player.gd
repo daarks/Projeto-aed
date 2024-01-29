@@ -5,6 +5,9 @@ signal bullet_shot(bullet_scene, location)
 @onready var marker = $Marker2D
 @onready var world = $".."
 
+
+@onready var UI = %UI
+
 @export var SPEED : int = 70
 @export var lastDir: String = "right"
 
@@ -12,11 +15,11 @@ var bullet_scene = preload("res://Bullet.tscn")
 
 var shoot_sound = load("res://blaster-2-81267.mp3")
 var death_sound = load("res://videogame-death-sound-43894.mp3")
-const MUNICAO = 5
+const MUNICAO = 1
 
 @export var fila = [null, null, null, null]
 
-var _Fila = Fila.new()
+@export var _FilaPlayer = Fila.new()
 
 var gunsColors = {
 	"red": "#ff0000",
@@ -26,13 +29,13 @@ var gunsColors = {
 }
 
 func _ready():
-	_Fila.Insere(fila, gunsColors.red, MUNICAO)
-	_Fila.Insere(fila, gunsColors.yellow, MUNICAO)
-	_Fila.Insere(fila, gunsColors.blue, MUNICAO)
+	_FilaPlayer.Insere(fila, gunsColors.red, MUNICAO)
+	_FilaPlayer.Insere(fila, gunsColors.yellow, MUNICAO)
 	pass
 
 
 func _process(delta):
+	UI.update_inventory_player(fila)
 	if not Engine.is_editor_hint():
 
 		if Input.is_action_just_pressed("shoot"):
@@ -99,39 +102,45 @@ func _physics_process(delta):
 		move_and_slide()
 
 func shoot():
-	var returns = [5, null]
-	if _Fila.DiminuirMunicao(fila, returns):
-		var hexColor = _Fila.ImprimirHexaCor(fila)
+	var returns = [1, null]
+	if _FilaPlayer.DiminuirMunicao(fila, returns):
+		var hexColor = _FilaPlayer.ImprimirHexaCor(fila)
 		bullet_shot.emit(bullet_scene, marker.global_position, lastDir, hexColor)
 		if returns[0] == 0:
-			_Fila.Retira(fila, returns)
-			
-		hexColor = _Fila.ImprimirHexaCor(fila)
+			_FilaPlayer.Retira(fila, returns)
+		hexColor = _FilaPlayer.ImprimirHexaCor(fila)
 		world.update_ui_color(hexColor)
-		world.update_ui_ammo(returns[0])
+		
+		if _FilaPlayer.Vazia(fila):
+				world.update_ui_ammo(0)
+		else:
+			world.update_ui_ammo(1)
+
 		AudioManager.play_effect(shoot_sound)
 	else:
 		return
 		
 func insertAmmo(color):
-	_Fila.Insere(fila, color, MUNICAO)
-	if _Fila.Ultimo == 0:
+	_FilaPlayer.Insere(fila, color, MUNICAO)
+	if _FilaPlayer.Ultimo == 0:
 		world.update_ui_color(color)
 		world.update_ui_ammo(MUNICAO)
 
 
+
+func _on_area_2d_body_entered(body):
+	if body.name.contains("mob"):
+		get_tree().reload_current_scene()
+
+		
 func _on_hitbox_body_entered(body):
 	if body.name == "mob":
 			AudioManager.play_effect(death_sound)
-			queue_free()
 	elif body.name == "mob_red":
 			AudioManager.play_effect(death_sound)
-			queue_free()
 	elif body.name == "mob_yellow":
 			AudioManager.play_effect(death_sound)
-			queue_free()
 	elif body.name == "mob_purple":
 			AudioManager.play_effect(death_sound)
-			queue_free()
 			
 	pass # Replace with function body.
