@@ -15,6 +15,7 @@ extends Node2D
 @export var filaSpawnGuns = [null, null, null, null]
 
 var _Fila = Fila.new()
+var _Teste = Fila.new()
 
 var ammo_Scene = preload("res://ammo.tscn")
 
@@ -29,8 +30,10 @@ var gunsColors = {
 func _ready():
 	player.bullet_shot.connect(_on_player_bullet_shot)
 	randomize()
+	#print(GenerateWeaponRandom())
 	_Fila.Insere_Prioridade(filaSpawnGuns, gunsColors.red, 5, false)
 	_Fila.Insere_Prioridade(filaSpawnGuns, gunsColors.yellow, 5, true)
+	print(EstaNaFila(filaSpawnGuns, gunsColors.purple))
 
 
 func _on_player_bullet_shot(bullet_scene, location, direction, hexColor):
@@ -97,3 +100,32 @@ func _on_ammo_timer_timeout():
 		AmmoContainer.add_child(ammo)
 		_Fila.Retira(filaSpawnGuns, returns)
 	pass # Replace with function body.
+
+func GenerateWeaponRandom():
+	var size = gunsColors.size()
+	var random_key = gunsColors.keys()[randi() % size]
+	var random_choice = gunsColors[random_key]
+	return random_choice
+
+
+func EstaNaFila(fila, corArma):
+	var returns = [5, null]
+	var filaAux = [null, null, null, null]
+	var estaFila =  false
+	
+	while not _Teste.Vazia(fila):
+		_Teste.Retira(fila,returns)
+		_Teste.Insere(filaAux, returns[0], returns[1])
+		if corArma == returns[1]:
+			estaFila = true
+			
+	while not _Teste.Vazia(filaAux):
+		print(_Teste.Vazia(filaAux))
+		_Teste.Retira(filaAux,returns)
+		_Teste.Insere(fila, returns[0], returns[1])
+		print("---------------------")
+		print(returns)
+		print(filaAux)
+		
+
+	return estaFila

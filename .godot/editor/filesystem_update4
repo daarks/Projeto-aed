@@ -1,12 +1,4 @@
 res://world.tscn
-res://ui.tscn
-res://mob.tscn
-res://mob_purple.tscn
-res://mob_red.tscn
-res://mob_yellow.tscn
-res://Bullet.tscn
-res://fila.gd
-res://world.gd
 res://ammo.tscn
-res://ammo.gd
-res://player.gd
+res://world.gd
+res://fila.gd
