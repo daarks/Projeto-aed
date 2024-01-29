@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://bktdswrhlq1na"]
+
+[ext_resource type="Script" path="res://AudioManager/audio_manager.gd" id="1_avy20"]
+
+[node name="AudioManager" type="Node"]
+script = ExtResource("1_avy20")
+
+[node name="Music_player" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Effect_player" type="Node" parent="."]
+
+[node name="effect_player_1" type="AudioStreamPlayer" parent="Effect_player"]
+volume_db = -5.0
+
+[node name="effect_player_2" type="AudioStreamPlayer" parent="Effect_player"]
+volume_db = -5.0
+
+[node name="effect_player_3" type="AudioStreamPlayer" parent="Effect_player"]
+volume_db = -5.0

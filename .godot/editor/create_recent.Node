@@ -1,7 +1,10 @@
-Timer
-Node2D
+AudioStreamPlayer
+Node
+AudioStreamPlayer2D
 CollisionShape2D
 Area2D
+Timer
+Node2D
 PathFollow2D
 Path2D
 Marker2D
@@ -9,6 +12,3 @@ Sprite2D
 Label
 MarginContainer
 Control
-CanvasLayer
-VisibleOnScreenEnabler2D
-Camera2D

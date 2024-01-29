@@ -1,21 +1,12 @@
 res://world.tscn
-<<<<<<< HEAD
 res://ammo.tscn
 res://mob.tscn
 res://Bullet.tscn
 res://mob_purple.tscn
 res://mob_red.tscn
 res://mob_yellow.tscn
-=======
-res://ui.tscn
-res://mob.tscn
-res://mob_purple.tscn
-res://mob_red.tscn
-res://mob_yellow.tscn
-res://Bullet.tscn
-res://fila.gd
-res://world.gd
-res://ammo.tscn
-res://ammo.gd
+res://player.tscn
+res://AudioManager/audio_manager.tscn
+res://AudioManager/audio_manager.gd
 res://player.gd
->>>>>>> a661e501d89416b8ec62f1cd52e96fd21e0910c8
+res://world.gd
