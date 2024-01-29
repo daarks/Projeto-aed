@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bd5ls2nn0pdvb"]
+[gd_scene load_steps=14 format=3 uid="uid://bd5ls2nn0pdvb"]
 
 [ext_resource type="Texture2D" uid="uid://bqmdkm1i2yaks" path="res://Tiles/TileTest.png" id="1_d2kkn"]
 [ext_resource type="Script" path="res://world.gd" id="1_y1kw0"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://brof44dmrpqyx" path="res://mob_purple.tscn" id="4_tgly2"]
 [ext_resource type="PackedScene" uid="uid://brmdkpaaklrk2" path="res://mob.tscn" id="5_44rt1"]
 [ext_resource type="PackedScene" uid="uid://c1qf8w2w4xkny" path="res://Bullet.tscn" id="9_psmam"]
+[ext_resource type="AudioStream" uid="uid://104trggstd27" path="res://Pixel 6.wav" id="10_lvffa"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rkgjk"]
 texture = ExtResource("1_d2kkn")
@@ -124,6 +125,11 @@ position = Vector2(592, 232)
 
 [node name="mob_purple" parent="." instance=ExtResource("4_tgly2")]
 position = Vector2(600, 336)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_lvffa")
+volume_db = -10.0
+autoplay = true
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]

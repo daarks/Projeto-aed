@@ -1,14 +1,21 @@
+<<<<<<< HEAD
 Label
 Node2D
 CollisionShape2D
 Area2D
 Timer
+=======
+AudioStreamPlayer
+Node
+AudioStreamPlayer2D
+CollisionShape2D
+Area2D
+Timer
+Node2D
+>>>>>>> 92c4af531b82b48c0b2176ffb980af0d42ca095c
 PathFollow2D
 Path2D
 Marker2D
 Sprite2D
 MarginContainer
 Control
-CanvasLayer
-VisibleOnScreenEnabler2D
-Camera2D

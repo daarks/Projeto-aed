@@ -13,6 +13,8 @@ signal bullet_shot(bullet_scene, location)
 
 var bullet_scene = preload("res://Bullet.tscn")
 
+var shoot_sound = load("res://blaster-2-81267.mp3")
+var death_sound = load("res://videogame-death-sound-43894.mp3")
 const MUNICAO = 1
 
 @export var fila = [null, null, null, null]
@@ -114,6 +116,7 @@ func shoot():
 		else:
 			world.update_ui_ammo(1)
 
+		AudioManager.play_effect(shoot_sound)
 	else:
 		return
 		
@@ -128,3 +131,20 @@ func insertAmmo(color):
 func _on_area_2d_body_entered(body):
 	if body.name.contains("mob"):
 		get_tree().reload_current_scene()
+
+		
+func _on_hitbox_body_entered(body):
+	if body.name == "mob":
+			AudioManager.play_effect(death_sound)
+			queue_free()
+	elif body.name == "mob_red":
+			AudioManager.play_effect(death_sound)
+			queue_free()
+	elif body.name == "mob_yellow":
+			AudioManager.play_effect(death_sound)
+			queue_free()
+	elif body.name == "mob_purple":
+			AudioManager.play_effect(death_sound)
+			queue_free()
+			
+	pass # Replace with function body.

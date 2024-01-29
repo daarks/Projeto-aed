@@ -16,6 +16,8 @@ extends Node2D
 
 var _Fila = Fila.new()
 
+var mob_sound = load("res://Zombie-Aggressive-Attack-A1-www.fesliyanstudios.com.mp3")
+
 var ammo_Scene = preload("res://ammo.tscn")
 
 var gunsColors = {
@@ -55,6 +57,7 @@ func _on_mob_timer_timeout():
 	var mob_red = mob_red_scene.instantiate()
 	var mob_yellow = mob_yellow_scene.instantiate()
 	var mob_purple = mob_purple_scene.instantiate()
+	AudioManager.play_effect(mob_sound)
 
 
 	# Choose a random location on Path2D.
