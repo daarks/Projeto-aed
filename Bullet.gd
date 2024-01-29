@@ -7,6 +7,8 @@ extends Area2D
 @onready var player = $Player
 @onready var sprite = $Sprite2D
 
+var world;
+
 var _Fila = Fila.new()
 
 func _ready():
@@ -46,5 +48,5 @@ func _on_body_entered(body):
 	elif body.name == "mob_purple":
 		if self.hexColor == "#800080":
 			queue_free()
-			
+	
 	pass # Replace with function body.

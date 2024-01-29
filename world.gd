@@ -15,7 +15,6 @@ extends Node2D
 @export var filaSpawnGuns = [null, null, null, null]
 
 var _Fila = Fila.new()
-var _Teste = Fila.new()
 
 var ammo_Scene = preload("res://ammo.tscn")
 
@@ -30,10 +29,9 @@ var gunsColors = {
 func _ready():
 	player.bullet_shot.connect(_on_player_bullet_shot)
 	randomize()
-	#print(GenerateWeaponRandom())
-	_Fila.Insere_Prioridade(filaSpawnGuns, gunsColors.red, 5, false)
-	_Fila.Insere_Prioridade(filaSpawnGuns, gunsColors.yellow, 5, true)
-	print(EstaNaFila(filaSpawnGuns, gunsColors.purple))
+	_Fila.Insere(filaSpawnGuns, gunsColors.purple, 1)
+	_Fila.Insere(filaSpawnGuns, gunsColors.blue, 1)
+	AleatorizarArmas()
 
 
 func _on_player_bullet_shot(bullet_scene, location, direction, hexColor):
@@ -94,7 +92,7 @@ func _on_ammo_timer_timeout():
 		ammo_location.progress_ratio = randf()
 
 		var ammo = ammo_Scene.instantiate()
-		var returns = [5, null]
+		var returns = [1, null]
 		ammo.hexColor = _Fila.ImprimirHexaCor(filaSpawnGuns)
 		ammo.position = ammo_location.position
 		AmmoContainer.add_child(ammo)
@@ -109,23 +107,41 @@ func GenerateWeaponRandom():
 
 
 func EstaNaFila(fila, corArma):
-	var returns = [5, null]
+	var returns = [1, null]
 	var filaAux = [null, null, null, null]
 	var estaFila =  false
 	
-	while not _Teste.Vazia(fila):
-		_Teste.Retira(fila,returns)
-		_Teste.Insere(filaAux, returns[0], returns[1])
+	var _FilaAux = Fila.new()
+	
+	while not _Fila.Vazia(fila):
+		_Fila.Retira(fila,returns)
+		_FilaAux.Insere(filaAux, returns[0], returns[1])
 		if corArma == returns[1]:
 			estaFila = true
-			
-	while not _Teste.Vazia(filaAux):
-		print(_Teste.Vazia(filaAux))
-		_Teste.Retira(filaAux,returns)
-		_Teste.Insere(fila, returns[0], returns[1])
-		print("---------------------")
-		print(returns)
-		print(filaAux)
-		
+	
+	returns  = [1, null]
+	while not _FilaAux.Vazia(filaAux):
+		_FilaAux.Retira(filaAux,returns)
+		_Fila.Insere(fila, returns[0], returns[1])
 
 	return estaFila
+
+
+func AleatorizarArmas():
+	if _Fila.Vazia(filaSpawnGuns):
+		print(player.fila)	
+		var generateWeapon;
+		var estaFila = false;
+		var aux = 0;
+		
+		while aux != 4:
+			generateWeapon = GenerateWeaponRandom()
+			
+			if not EstaNaFila(filaSpawnGuns, generateWeapon):
+				estaFila = not EstaNaFila(player.fila, generateWeapon)
+				_Fila.Insere_Prioridade(filaSpawnGuns, generateWeapon, 1, estaFila)
+				aux = aux + 1
+			
+		print(player.fila)	
+		print("----")
+		print(filaSpawnGuns)

@@ -1,7 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://d2yjf15q4jwah"]
+[gd_scene load_steps=5 format=3 uid="uid://d2yjf15q4jwah"]
 
 [ext_resource type="Script" path="res://UI.gd" id="1_vtlj5"]
-[ext_resource type="Texture2D" uid="uid://d4gseufpevef8" path="res://Sprites/Bullets/white.png" id="2_hwajn"]
+[ext_resource type="PackedScene" uid="uid://vvutvhwu2m5y" path="res://ammo_ui.tscn" id="2_oebuw"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tcwkw"]
+font_size = 24
 
 [sub_resource type="LabelSettings" id="LabelSettings_fotwo"]
 font_size = 24
@@ -29,18 +32,26 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
+[node name="player_score" type="Label" parent="Control/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Pontuação: 0"
+label_settings = SubResource("LabelSettings_tcwkw")
+horizontal_alignment = 2
+
 [node name="Label" type="Label" parent="Control/MarginContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 0
-text = "Munição: 5"
+text = "Munição: 1
+"
 label_settings = SubResource("LabelSettings_fotwo")
 
-[node name="ammo_ui" type="Sprite2D" parent="Control/MarginContainer"]
+[node name="ammo_ui" parent="Control/MarginContainer" instance=ExtResource("2_oebuw")]
 unique_name_in_owner = true
-modulate = Color(1, 0, 0, 1)
-texture_filter = 1
-position = Vector2(196, 52)
-scale = Vector2(0.106741, 0.245)
-texture = ExtResource("2_hwajn")
+
+[node name="InventoryContainer" type="Node2D" parent="Control/MarginContainer"]
+unique_name_in_owner = true

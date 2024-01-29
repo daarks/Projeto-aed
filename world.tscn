@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://world.gd" id="1_y1kw0"]
 [ext_resource type="PackedScene" uid="uid://dt2u6yke3ydlm" path="res://player.tscn" id="2_u7s07"]
 [ext_resource type="PackedScene" uid="uid://dgxh7ase045qx" path="res://mob_red.tscn" id="3_wfesu"]
-[ext_resource type="PackedScene" uid="uid://d2yjf15q4jwah" path="res://ui.tscn" id="4_65uki"]
+[ext_resource type="PackedScene" uid="uid://d2yjf15q4jwah" path="res://Sprites/ui.tscn" id="4_65uki"]
 [ext_resource type="PackedScene" uid="uid://bsdkogr6lxy6p" path="res://mob_yellow.tscn" id="4_e8g7p"]
 [ext_resource type="PackedScene" uid="uid://brof44dmrpqyx" path="res://mob_purple.tscn" id="4_tgly2"]
 [ext_resource type="PackedScene" uid="uid://brmdkpaaklrk2" path="res://mob.tscn" id="5_44rt1"]
@@ -89,10 +89,6 @@ autostart = true
 [node name="StartTimer" type="Timer" parent="."]
 wait_time = 30.0
 one_shot = true
-
-[node name="AmmoTimer" type="Timer" parent="."]
-wait_time = 2.0
-autostart = true
 
 [node name="AmmoTimer" type="Timer" parent="."]
 wait_time = 2.0

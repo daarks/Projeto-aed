@@ -45,8 +45,8 @@ func Insere(fila, hexaCor, municao):
 func Retira(fila,x):
 	if Vazia(fila):
 		return false
-	x[0] = fila[Ultimo].Ammo
-	x[1] = fila[Ultimo].HexaCor
+	x[0] = fila[0].Ammo
+	x[1] = fila[0].HexaCor
 	fila[0] = null
 	for n in range(-1, LIMITE_ARMAS - 1):
 		fila[n+1] = fila[n+2]
