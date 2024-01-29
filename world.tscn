@@ -83,11 +83,16 @@ zoom = Vector2(2.285, 2.285)
 unique_name_in_owner = true
 
 [node name="MobTimer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 15.0
 autostart = true
 
 [node name="StartTimer" type="Timer" parent="."]
-wait_time = 10.0
+wait_time = 30.0
+one_shot = true
+
+[node name="AmmoTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
 
 [node name="AmmoTimer" type="Timer" parent="."]
 wait_time = 2.0
@@ -112,6 +117,17 @@ position = Vector2(176, 112)
 rotation = -0.0178552
 
 [node name="Bullet" parent="." instance=ExtResource("9_psmam")]
+
+[node name="mob" parent="." instance=ExtResource("5_44rt1")]
+
+[node name="mob_red" parent="." instance=ExtResource("3_wfesu")]
+position = Vector2(600, 128)
+
+[node name="mob_yellow" parent="." instance=ExtResource("4_e8g7p")]
+position = Vector2(592, 232)
+
+[node name="mob_purple" parent="." instance=ExtResource("4_tgly2")]
+position = Vector2(600, 336)
 
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
 [connection signal="timeout" from="StartTimer" to="." method="_on_start_timer_timeout"]

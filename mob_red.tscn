@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://dgxh7ase045qx"]
+[gd_scene load_steps=54 format=3 uid="uid://dgxh7ase045qx"]
 
 [ext_resource type="Script" path="res://mob_red.gd" id="1_b8ei5"]
 [ext_resource type="Texture2D" uid="uid://dc0nutcfhvd5r" path="res://Sprites/Monster/Down/tile024.png" id="2_svwt1"]
@@ -223,7 +223,10 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_5xw2j"]
 radius = 177.168
 
-[node name="mob" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rwwjh"]
+size = Vector2(24, 24)
+
+[node name="mob_red" type="CharacterBody2D"]
 modulate = Color(1, 0, 0, 1)
 position = Vector2(516, 244)
 script = ExtResource("1_b8ei5")
@@ -246,4 +249,11 @@ scale = Vector2(2.3125, 2.21875)
 position = Vector2(0.432434, 0.450703)
 shape = SubResource("CircleShape2D_5xw2j")
 
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_rwwjh")
+
 [connection signal="body_entered" from="PlayerDetection" to="." method="_on_player_detection_body_entered"]
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
